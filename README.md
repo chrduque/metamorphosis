@@ -12,7 +12,7 @@ Then
 ```
 source("photometric_FeH.R")
 ```
-So now you are able to use the function estimate_FeH. The input arguments of this function are the photometric/astrometric data and their errors, and the chosen diagram. For example, for the best calibration in Table 5:
+So now you are able to use the function 'estimate_FeH'. The input arguments of this function are the photometric/astrometric data and their errors, and the chosen diagram. For example, for the best calibration in Table 5:
 ```
 FeH_post = estimate_FeH(W1=,eW1=,W2=,eW2=,BP=,eBP=,RP=,eRP=,K=,eK=,parallax=,eparallax=,diagram='W1W2-BPRP-K')
 ```
