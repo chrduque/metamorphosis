@@ -1,36 +1,39 @@
-# metamorphosis
+# METaMorPHosis
 
 DRAFT
 
 This is the R code to calculate the photometric metallicity estimations described in Duque-Arribas et al. (in prep.):\
 (INSERT LINK WHEN AVAILABLE)
 
-Really easy to use! Just download/clone both files, photometric_FeH.R and chains.rds, in the desired folder and set it as your working directory:
+Really easy to use! Just download/clone both files, metamorphosis.R and chains.rds, in the desired folder, start a R session, and set it as your working directory:
 ```
+R
 setwd("~/Documents/myfolder")
 ```
 
 Then
 ```
-source("photometric_FeH.R")
+source("metamorphosis.R")
 ```
-So now you are able to use the function 'estimate_FeH'. The input arguments of this function are the photometric/astrometric data and their errors, and the chosen diagram. For example, for the best calibration in Table 5:
+So now you are able to use the function 'metamorphosis()'. The input arguments of this function are the photometric/astrometric data, their errors, and the chosen diagram. For example, for the best calibration in Table 4:
 ```
-FeH_post = estimate_FeH(W1=,eW1=,W2=,eW2=,BP=,eBP=,RP=,eRP=,K=,eK=,parallax=,eparallax=,diagram='W1W2-BPRP-K')
+FeH_post = metamorphosis(X=,eX=,Y=,eY=,Z=eZ=,diagram='W1W2-BPRP-G')
 ```
-The output of this function will be a vector of 12000 elements, which is the posterior distribution for the metallicity of your star. You will receive a message with the median and MAD values of this distribution.
+The output of this function will be a vector of 7500 elements, which is the posterior distribution for the metallicity of your star. You will receive a message with the median and MAD values of this distribution.
 
 If you are interested in estimating the metallicity for a star sample of N stars stored in the table 'mydata', you can use the function with a loop and store the posterior distributions in a matrix:
 ```
-FeH_post_matrix = matrix(nrow=N, ncol=12000)
-for (i in 1:435) {
-  FeH_post_matrix[i, ] = estimate_FeH(W1=mydata$W1mag[i],W2=mydata$W2mag[i],BP=mydata$phot_bp_mean_mag[i],RP=mydata$phot_rp_mean_mag[i],K=mydata$Kmag[i],parallax=mydata$parallax[i],                      
-                                      eW1=mydata$e_W1mag[i],eW2=mydata$e_W2mag[i],eBP=mydata$phot_bp_mean_mag_error[i],eRP=mydata$phot_rp_mean_mag_error[i],eK=mydata$e_Kmag[i],eparallax=mydata$parallax_error[i],
-                                      diagram='W1W2-BPRP-K')
+FeH_post_matrix = matrix(nrow=N, ncol=7500)
+for (i in 1:N) {
+  FeH_post_matrix[i, ] = metamorphosis(X=mydata$W1W2[i],Y=mydata$BPRP[i],Z=M_G[i],                      
+                                      eX=mydata$e_W1W2[i],eY=mydata$e_BPRP[i],eZ=mydata$e_M_G[i],
+                                      diagram='W1W2-BPRP-G')
 }
 ```
 
-Each row in FeH_post_matrix is the posterior distribution of one of your stars. You can calculate all the median values of these distributions using:
+Each row in FeH_post_matrix is the posterior distribution of one of your N stars. You can calculate all the median values of these distributions using:
 ```
 apply(posteriors, 1, median)
 ```
+
+Alternatively, you can use the following shinyapp: [https://chrduque.shinyapps.io/metamorphosis/](https://chrduque.shinyapps.io/metamorphosis/). Just choose your diagram, enter your data and see the posterior distribution of the photometric metallicity for your star!
