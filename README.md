@@ -1,4 +1,4 @@
-# METaMorPHosis: METallicity for M dwarfs using PHotometry
+## METaMorPHosis: METallicity for M dwarfs using PHotometry
 
 DRAFT
 
