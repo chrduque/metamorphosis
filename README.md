@@ -15,9 +15,9 @@ Then
 ```
 source("metamorphosis.R")
 ```
-So now you are able to use the function 'metamorphosis()'. The input arguments of this function are the photometric/astrometric data, their errors, and the chosen diagram. For example, for the best calibration in Table 4:
+So now you are able to use the function 'metamorphosis()'. The input arguments of this function are the photometric/astrometric data, their errors, and the chosen diagram. For example, for HD 38529 B and using the best calibration in Table 4:
 ```
-FeH_post = metamorphosis(X=,eX=,Y=,eY=,Z=eZ=,diagram='W1W2-BPRP-G')
+FeH_post = metamorphosis(X=0.049,eX=0.006,Y=2.403,eY=0.005,Z=9.187,eZ=0.003,diagram='W1W2-BPRP-G')
 ```
 The output of this function will be a vector of 7500 elements, which is the posterior distribution for the metallicity of your star. You will receive a message with the median and MAD values of this distribution.
 
