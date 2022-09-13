@@ -44,10 +44,9 @@ metamorphosis = function(X=NULL,Y=NULL,Z=NULL,eX=0,eY=0,eZ=0,diagram="W1W2-BPRP-
     d = chains[[diagram]]$`beta[4]`
     e = chains[[diagram]]$`beta[5]`
     f = chains[[diagram]]$`beta[6]`
-    g = chains[[diagram]]$`beta[7]`
     sigma = chains[[diagram]]$sigma
     nu = chains[[diagram]]$nu
-    mu = a+b*X+c*Y+d*Z+e*Y^2+f*Z^2+g*Z^3
+    mu = a+b*X+c*Y+d*Z+e*Y^2+f*Z^2
     FeH = rt.scaled(n=7500,df=nu,mean=mu,sd=sigma)
     print(paste('Estimated metallicity:',round(median(FeH),3),'+-',round(mad(FeH),3)))
     return(FeH)
